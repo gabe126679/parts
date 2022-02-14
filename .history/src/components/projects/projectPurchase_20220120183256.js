@@ -1,0 +1,15 @@
+import React from 'react'
+
+export default class ProjectPurchase extends React.Component {
+    render() {
+    const handleClick = () => {
+        console.log(this.props.match);
+    }
+        return (
+            <div>
+                <button onClick={handleClick}>hello</button>
+            </div>
+        )
+    }
+}
+

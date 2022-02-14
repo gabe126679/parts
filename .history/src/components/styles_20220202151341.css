@@ -1,0 +1,392 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: sans-serif;
+} 
+
+/*  */
+
+/* .fred {
+  position: absolute;
+  top: 1em;
+  background-color: blue;
+} */
+/* image grid styles */
+/* form{
+  margin: 30px auto 10px;
+  text-align: center;
+} */
+/* label input{
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+label{
+  display: block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  margin: 10px auto;
+  line-height: 30px;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 24px;
+} */
+.searchBox {
+  position: absolute;
+  top: 79px;
+  width: 70%;
+  right: 40%;
+  display: flex;
+  flex-wrap: wrap; 
+  color: black;
+}
+.searchBar {
+  position: absolute;
+  top: -5.4em;
+  width: 120px;
+  height: 100%;
+  text-align: center;
+  color: blue;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+label:hover{
+  background: var(--primary);
+  color: white;
+}
+.output{
+  height: 60px;
+  font-size: 0.8rem;
+}
+.error{
+  color: var(--error);
+}
+
+/* progress bar styles */
+.progress-bar{
+  height: 5px;
+  background: var(--primary);
+  margin-top: 20px;
+}
+.img-grid{
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-gap: 2px;
+}
+.img-wrap{
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  /* padding controls height, will always be perfectly square regardless of width */
+  position: relative;
+  opacity: 0.8;
+}
+.img-wrap img{
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.backdrop img{
+  display: block;
+  max-width: 60%;
+  max-height: 80%;
+  margin: 60px auto;
+  box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
+  border: 3px solid white;
+}
+.image-sm {
+  width: 400px;
+}
+.search-box {
+  display: flex;
+}
+#header {
+  position: relative;
+}
+
+#navbar {
+  background-color: #000;
+}
+#motorcycle {
+  font-size: 40px;
+  position: absolute;
+  left: 40px;
+}
+#bars {
+  display: none;
+}
+/* #dropdown-menu {
+  display: none;
+} */
+#allLinks {
+  display: inline;
+}
+
+div.scrollmenu {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+
+#images {
+  margin: 10px;
+  position: relative;
+  top: 3px;
+  left: 170px;
+}
+
+@media only screen and (max-width: 600px) {
+  .search-box {
+    display: flex;
+  }
+  .img-grid{
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+    grid-gap: 2px;
+  }
+  .img-wrap{
+    overflow: hidden;
+    height: 0;
+    padding: 50% 0;
+    /* padding controls height, will always be perfectly square regardless of width */
+    position: relative;
+    opacity: 0.8;
+  }
+  .img-wrap img{
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 150%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .row {
+    margin: 2px; 
+  }
+  div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 10px;
+  }
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none; 
+  }
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+  #navbar {
+    background-color: #000;
+  }
+  #motorcycle {
+    font-size: 25px;
+    color: rgb(17, 0, 255);
+    float: left;
+    position: absolute;
+    left: 30px;
+  }
+  #bars {
+    margin: 0 auto;
+    display: inline;
+    position: absolute;
+    right: 30px;
+    top: 17px;
+  }
+  #allLinks {
+    display: none;
+  }
+  #dropdown {
+    position: relative;
+    z-index: 10;
+  }
+  #dropdown-menu {
+    display: inline;
+    position: absolute;
+    width: 100%;
+    left: 5%;
+    top: calc(100% + 3.28rem);
+    padding: .75rem;
+    border-radius: .25rem;
+    box-shadow: 0 2px 5px 0 rbga(0, 0, 0, .1);
+    /* transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out; */
+  }
+  #dropdown > .link:focus + #dropdown-menu {
+    opacity: 1;
+    /* transform: translateY(0); */
+
+    
+  }
+  #dropdown-content {
+    background-color: black;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .new-project {
+    margin: 10px;
+    position: relative;
+    line-height: 1.5em;
+  }
+  #header {
+    position: relative;
+  }
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.checkout {
+  padding-top: 10px;
+}
+
+.checkout-title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.checkout-price {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 95px;
+  margin: 0;
+  color: rgba(0, 0, 0, 1);
+}
+
+.checkout-description {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 18px;
+  max-width: 200px;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.checkout-product-image {
+  width: 400px;
+}
+
+.checkout-button {
+  background: linear-gradient(180deg, #ffffff 0%, #d9dfff 100%);
+  border: 0.5px solid rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1),
+    0px 20px 40px rgba(23, 0, 102, 0.2);
+  border-radius: 20px;
+
+  display: flex;
+
+  padding: 4px;
+  width: 169px;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.checkout-button:focus {
+  outline: none;
+}
+
+.checkout-button:hover {
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1),
+    0px 30px 60px rgba(23, 0, 102, 0.3);
+  transform: translateY(-2px);
+}
+
+.checkout-button .grey-circle {
+  background: rgba(68, 66, 178, 0.1);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-button .purple-circle {
+  background: linear-gradient(200.44deg, #4316db 13.57%, #9076e7 98.38%);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.1);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-button .icon {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+}
+
+.checkout-button .text-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 4px;
+  margin: auto;
+  text-align: left;
+  margin-left: 16px;
+}
+
+.checkout-button .text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 17px;
+  line-height: 130%;
+  margin: 0;
+  color: rgba(0, 0, 0, 1);
+  margin: 0;
+}
+  
