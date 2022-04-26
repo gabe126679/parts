@@ -9,7 +9,6 @@ import { projectFirestore } from '../../config/fbConfig'
 const SignedInLinks = (props) => {
   const { notifications, auth } = props;
 
-
   const [Open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
   

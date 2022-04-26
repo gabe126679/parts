@@ -207,10 +207,9 @@ class CreateProject extends Component {
             </button>
 
           </div>
+          
         </form>
-        <button onClick={this.handleNoise}>
-            bsnt
-            </button>
+        <br/>
       </div>
     );
   }

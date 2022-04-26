@@ -13,111 +13,35 @@ class Dashboard extends Component {
     this.state = {
       category: "",
       search: "",
+      categories: ["exhaust", "engine parts and accessories", "fuel and air", "lights and electrical", "brakes", "body", "tires and wheels", "custom"]
     };
   }
   
   render() {
     let { projects, auth, notifications } = this.props;    
     
-    const handleClick = () => {
-        if (this.state.category === "exhaust") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "exhaust"
-          });
+    const handleClick = (e) => {
+
+        
+        this.state.categories.map((tag) => {
+            if (e.target.id === tag) {
+              this.setState({
+                category: ""
+              });
+            } else {
+              this.setState({
+                category: e.target.id
+              });
+            }
+          })
+          if (e.target.id === "all") {
+            this.setState({
+              category: ""
+            });
+          }
+          console.log(this.state.category)
+
         }
-    }
-    const handleClick2 = () => {
-      if (this.state.category === "engine parts and accessories") {
-        this.setState({
-          category: ""
-        });
-      } else {
-        this.setState({
-          category: "engine parts and accessories"
-        });
-      }
-      }
-      const handleClick3 = () => {
-        if (this.state.category === "fuel and air") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "fuel and air"
-          });
-        }
-      }
-      const handleClick4 = () => {
-        if (this.state.category === "lights and electrical") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "lights and electrical"
-          });
-        }
-      }
-      const handleClick5 = () => {
-        if (this.state.category === "brakes") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "brakes"
-          });
-        }
-      }
-      const handleClick6 = () => {
-        if (this.state.category === "body") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "body"
-          });
-        }
-      }
-      const handleClick7 = () => {
-        if (this.state.category === "tires and wheels") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "tires and wheels"
-          });
-        }
-      }
-      const handleClick8 = () => {
-        if (this.state.category === "custom") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "custom"
-          });
-        }
-      }
-      const handleClick9 = () => {
-        if (this.state.category === "my products") {
-          this.setState({
-            category: ""
-          });
-        } else {
-          this.setState({
-            category: "my products"
-          });
-        }
-      }
 
       const handleChange = (e) => {
 
@@ -138,246 +62,80 @@ class Dashboard extends Component {
 
     return (
       <div className="dashboard container">
-        <div className="searchBox">
-            <input className="searchBar"  onChange={handleChange} type="search" id="search" name="search" placeholder="Search Tags"/>
+        <br/>
+        <div className="search-container">
+          <input className="searchBar"  onChange={handleChange} type="search" id="search" name="search" placeholder="Search Tags"/>
         </div>
-
+          <h5 className="browse-heading">Browse Categories:</h5>
+        <br/> 
         <div className="row">
           <div className="scrollmenu">
+          
           {(() => {
-            if (this.state.category === "my products") {
-                return <a><button className="btn btn-three" onClick={handleClick9}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick9}>my products</button></a>      
-            }
-          })()}
-          {(() => {
-            if (this.state.category === "exhaust") {
-                return <a><button className="btn btn-three" onClick={handleClick}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick}>exhaust</button></a>      
-            }
-          })()}
-          {(() => {
-            if (this.state.category === "engine parts and accessories") {
-                return <a><button className="btn btn-three" onClick={handleClick2}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick2}>engine parts and accessories</button></a>      
-            }
-          })()}
-                    {(() => {
-            if (this.state.category === "fuel and air") {
-                return <a><button className="btn btn-three" onClick={handleClick3}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick3}>fuel and air</button></a>      
-            }
-          })()}
-                    {(() => {
-            if (this.state.category === "lights and electrical") {
-                return <a><button className="btn btn-three" onClick={handleClick4}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick4}>lights and electrical</button></a>      
-            }
-          })()}
-                    {(() => {
-            if (this.state.category === "brakes") {
-                return <a><button className="btn btn-three" onClick={handleClick5}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick5}>brakes</button></a>      
-            }
-          })()}
-                    {(() => {
-            if (this.state.category === "body") {
-                return <a><button className="btn btn-three" onClick={handleClick6}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick6}>body</button></a>      
-            }
-          })()}
-          {(() => {
-            if (this.state.category === "tires and wheels") {
-                return <a><button className="btn btn-three" onClick={handleClick7}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick7}>tires and wheels</button></a>      
-            }
-          })()}
-          {(() => {
-            if (this.state.category === "custom") {
-                return <a><button className="btn btn-three" onClick={handleClick8}>All Products</button></a>
-            } else {
-                return <a><button className="btn btn-three" onClick={handleClick8}>custom</button></a>      
-            }
-          })()}
-
-          </div>
-          {(() => {
-          if (
-            this.state.category === "exhaust" || this.state.search === "exhaust") {
             return (
+              <div>
+                <a><button className="btn btn-three" id="all" onClick={handleClick}>all products</button></a>
+                <a><button className="btn btn-three" id="exhaust" onClick={handleClick}>exhaust</button></a>
+                <a><button className="btn btn-three" id="engine parts and accessories" onClick={handleClick}>engine parts and accessories</button></a>
+                <a><button className="btn btn-three" id="fuel and air" onClick={handleClick}>fuel and air</button></a>
+                <a><button className="btn btn-three" id="lights and electrical" onClick={handleClick}>lights and electrical</button></a>
+                <a><button className="btn btn-three" id="brakes" onClick={handleClick}>brakes</button></a>
+                <a><button className="btn btn-three" id="body" onClick={handleClick}>body</button></a>
+                <a><button className="btn btn-three" id="tires and wheels" onClick={handleClick}>tires and wheels</button></a>
+                <a><button className="btn btn-three" id="custom" onClick={handleClick}>custom</button></a>
+              </div>
+            )
+          })()}
+          </div>
+          <h5 className="flow-text">Top Products:</h5>
+          <div className="project-container">
+            <div className="col s12 m6">
+                  { projects && projects.map(project => {
+                      if (project.category === this.state.category || this.state.category === "") {
+                        return (
+                          <div className="project-filler">
+                          <div className="project-element">
+                            <button className="vote btn btn-primary" id="vote" onClick={() => {
+                              this.props.updateVote(auth.uid, project.id);
+                            }}>  Vote </button>                                
+                            <Link to={'/project/' + project.id}>
+                              <ProjectSummary project={project} key={project.id} />
+                            </Link>
+                          </div>
+                      </div>
+                        );
+                      } 
+                  })}           
+              </div>
+          </div>
+          <br/>
+            
+            <h5 className="flow-text">Exhaust Parts:</h5>
+
+
+
+            <div className="project-container">
               <div className="col s12 m6">
                 { projects && projects.map(project => {
                     if (project.category === "exhaust") {
                       return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
+                        <div className="project-filler">
+                          <div className="project-element">
+                            <button className="vote btn btn-primary" onClick={() => {
+                              this.props.updateVote(auth.uid, project.id);
+                            }}>  Vote </button>
+                                                              
+                            <Link to={'/project/' + project.id}>
+                              <ProjectSummary project={project} key={project.id} />
+                              
+                            </Link>
+                          </div>
+                        </div>  
                       );
                     }
-                })}           
+                })}   
               </div>
-            );
-          } else if (
-            this.state.category === "engine parts and accessories" || this.state.search === "engine parts and accessories") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "engine parts and accessories") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "fuel and air" || this.state.search === "fuel and air") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "fuel and air") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "lights and electrical" || this.state.search === "lights and electrical") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "lights and electrical") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "brakes" || this.state.search === "brakes") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "brakes") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "body" || this.state.search === "body") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "body") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "tires and wheels" || this.state.search === "tires and wheels") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "tires and wheels") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "custom" || this.state.search === "custom") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.category === "custom") {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else if (
-            this.state.category === "my products") {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if (project.authorId === auth.uid) {
-                      return (
-                        <Link to={'/project/' + project.id}>
-                          <ProjectSummary project={project} key={project.id} />
-                        </Link>
-                      );
-                    }
-                })}           
-              </div>
-            );
-          } else {
-            return (
-              <div className="col s12 m6">
-                { projects && projects.map(project => {
-                    if ((project.title === this.state.search || project.content === this.state.search || project.authorFirstName === this.state.search || project.authorLastName === this.state.search || this.state.search === "") && !project.votedOn.includes(auth.uid)) {
-                      return (
-                        <div>
-                          <button className="vote btn btn-primary" onClick={() => {
-                            this.props.updateVote(auth.uid, project.id);
-                          }}>  Vote </button>
-                          <Link to={'/project/' + project.id}>
-                            <ProjectSummary project={project} key={project.id} />
-                          </Link>
-                        </div>
-                      );
-                    } else if ((project.title === this.state.search || project.content === this.state.search || project.authorFirstName === this.state.search || project.authorLastName === this.state.search || this.state.search === "") && project.votedOn.includes(auth.uid)) {
-                        return (
-                          <div>
-                          <Link to={'/project/' + project.id}>
-                            <ProjectSummary project={project} key={project.id} />
-                          </Link>
-                        </div>
-                        )
-                      }
-                })}           
-              </div>
-            );   
-          }  
-          })()}
-          <div className="col s12 m5 offset-m1">
-            <Notifications notifications={notifications} />
-
-          </div>
+            </div> 
         </div>
       </div>
     );
