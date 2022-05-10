@@ -9,7 +9,7 @@ export const createProject = (project) => {
       category: project.category,
       price: project.price,
       content: project.content,
-      photos: [...project.photos],
+      photos: project.photos,
       tags: [...project.tags],
       upvoteCount: project.upvoteCount,
       votedOn: [...project.votedOn],

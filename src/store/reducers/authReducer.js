@@ -16,6 +16,30 @@ const authReducer = (state = initState, action) => {
         ...state,
         authError: null
       }
+    case 'UPDATE_CART_ERROR':
+      console.log('cart add error');
+      return {
+        ...state,
+        authError: 'cart add failed'
+      }
+    case 'UPDATE_CART_SUCCESS':
+      console.log('cart add success');
+      return {
+        ...state,
+        authError: null
+      }
+    case 'DELETE_CART_ERROR':
+      console.log('cart delete error');
+      return {
+        ...state,
+        authError: 'cart add failed'
+      }
+    case 'DELETE_CART_SUCCESS':
+      console.log('cart delete success');
+      return {
+        ...state,
+        authError: null
+      }
     case 'SIGNOUT_SUCCESS':
       console.log('signout success');
       return state;

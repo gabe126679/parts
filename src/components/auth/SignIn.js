@@ -9,6 +9,7 @@ class SignIn extends Component {
       password: ''
     }
 
+    
     handleChange = (e) => {
       this.setState({
         [e.target.id]: e.target.value
@@ -21,10 +22,13 @@ class SignIn extends Component {
     }
     
     render() {
+
+
       const { authError, auth } = this.props;
       if (auth.uid) return <Redirect to='/'/>
       return (
         <div className="container">
+          <br/>
           <form className="white" onSubmit={this.handleSubmit}>
             <h5 className="grey-text text-darken-3">Sign In</h5>
             <div className="input-field">
@@ -50,7 +54,9 @@ class SignIn extends Component {
 const mapStateToProps = (state) => {
     return{
       authError: state.auth.authError,
-      auth: state.firebase.auth
+      auth: state.firebase.auth,
+      projects: state.firestore.ordered.projects,
+      notifications: state.firestore.ordered.notifications
     }
   }
   

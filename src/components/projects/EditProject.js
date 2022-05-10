@@ -1,178 +1,178 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { editProject } from '../../store/actions/projectActions';
 import { Redirect } from 'react-router-dom';
 import UploadForm from './UploadForm';
 import ImageGrid from './ImageGrid';
-// import Modal from './Modal';
-// import Display from './Display';
 import { projectFirestore } from '../../config/fbConfig'
 
 
-class CreateProject extends Component {
-  state = {
-    id: "",
-    title: "",
-    category: "",
-    price: "",
-    content: "",
-    photos: [],
-    year: 2016,
-    brand: "",
-    shippingCost: "",
-    tags: [],
-    partNumber: "",
-    upvoteCount: 0,
-    votedOn: [],
-    make: "",
-    model: "",
-    comments: [],
-  } 
+const EditFunction = (props) => {
 
-  async componentDidMount() {
+  const { auth } = props;
+
+  const [title, setTitle] = useState("");
+  const [id, setId] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [content, setContent] = useState("");
+  const [photos, setPhotos] = useState([]);
+  const [year, setYear] = useState(2016);
+  const [brand, setBrand] = useState("");
+  const [shippingCost, setShippingCost] = useState("");
+  const [tags, setTags] = useState([]);
+  const [partNumber, setPartNumber] = useState("");
+  const [upvoteCount, setUpvoteCount] = useState(0);
+  const [votedOn, setVotedOn] = useState([]);
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [comments, setComments] = useState([]);
+  const [selectedImg, setSelectedImg] = useState(null);
+
+  useEffect(async () => {
     const response = projectFirestore.collection('projects');
-    const data = await response.get()
+    const data = await response.get();
     data.docs.forEach(doc => {
-        if (doc.id === this.props.match.params.id) {
-            this.setState({
-                title: doc.data().title,
-                category: doc.data().category,
-                price: doc.data().price,
-                content: doc.data().content,
-                photos: doc.data().photos,
-                year: doc.data().year,
-                brand: doc.data().brand,
-                shippingCost: doc.data().shippingCost,
-                tags: doc.data().tags,
-                partNumber: doc.data().partNumber,
-                upvoteCount: doc.data().upvoteCount,
-                votedOn: doc.data().votedOn,
-                make: doc.data().make,
-                model: doc.data().model,
-                comments: doc.data().comments,
-                id: this.props.match.params.id
-              })
+        if (doc.id === props.match.params.id) {
+            setTitle( doc.data().title);
+            setCategory( doc.data().category);
+            setPrice( doc.data().price);
+            setContent( doc.data().content);
+            setPhotos( doc.data().photos);
+            setYear( doc.data().year);
+            setBrand( doc.data().brand);
+            setShippingCost( doc.data().shippingCost);
+            setTags( doc.data().tags);
+            setPartNumber( doc.data().partNumber);
+            setUpvoteCount( doc.data().upvoteCount);
+            setVotedOn( doc.data().votedOn);
+            setMake( doc.data().make);
+            setModel( doc.data().model);
+            setComments( doc.data().comments);
+            setId( props.match.params.id);            
         }
-    })
-  }
+    });
+  }, []);
 
-  checkPictures = () => {
-
-    this.props.history.push('/create');
-  }
-
-  handleChange = async (e) => {
-    if (e.target.id === "price" && this.state.price === "") {
-      this.setState({
-        price: "$" + e.target.value 
-      });
-     } else if (e.target.id === "shippingCost" && this.state.shippingCost === "") {
-      this.setState({
-        shippingCost: "$" + e.target.value 
-      });   
-    } else if ((e.target.id === "price") && (!this.state.price === "")) {
-      this.setState({
-        price: e.target.value + ".00"
-      });     
-    } else if ((e.target.id === "shippingCost") && (!this.state.shippingCost === "")) {
-      this.setState({
-        shippingCost: e.target.value + ".00"
-      });     
-    } else if (!e.target.id === ("price" || "shippingCost" || "content")) {
-      this.setState({
-        tags: [...this.state.tags, e.target.value]
-      });
-    } else {
-      this.setState({
-        [e.target.id]: e.target.value,
-      });
-    }
-
-  }
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    let newTags = [
-      this.state.title,
-      this.state.category,
-      this.state.brand,
-      this.state.make,
-      this.state.model,
-      this.state.year,
-      this.state.partNumber,
-      this.state.title,
-    ];
-    
-    newTags.map((tag) => {
-      if (this.state.tags.includes(tag)) {
-        newTags.pop(tag);
+  const handleChange = async (e) => {
+      if (!e.target.id === ("price" || "shippingCost" || "content")) {
+      setTags(tags => [...tags, e.target.value])
+      } else if (e.target.id === "title") {
+          setTitle(e.target.value);
+      } else if (e.target.id === "brand") {
+          setBrand(e.target.value);
+      } else if (e.target.id === "make") {
+          setMake(e.target.value);
+      } else if (e.target.id === "model") {
+          setModel(e.target.value);
+      } else if (e.target.id === "category") {
+          setCategory(e.target.value);
+      } else if (e.target.id === "content") {
+          setContent(e.target.value);
+      } else if (e.target.id === "year") {
+          setYear(e.target.value);
+      } else if (e.target.id === "partNumber") {
+          setPartNumber(e.target.value);
+      } else if (e.target.id === "price") {
+        setPrice(e.target.value);
+      } else if (e.target.id === "shippingCost") {
+        setShippingCost(e.target.value);
       }
-        this.setState({
-          tags: newTags
-        });
-    })
+  }
 
-
-    const response = projectFirestore.collection('images');
-    const data = await response.get()
-    data.docs.forEach(doc => {
-      this.setState({
-        photos: [...this.state.photos, doc.data().url]
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+      let newTags = [
+      title,
+      category,
+      brand,
+      make,
+      model,
+      year,
+      partNumber,
+      title,
+      ];
+      
+      newTags.map((tag) => {
+      if (tags.includes(tag)) {
+          newTags.remove(tag);
+      }
+          setTags(newTags);
       })
-    });
 
-    this.props.editProject(this.state)
 
-    data.docs.forEach(doc => {
+      const response = projectFirestore.collection('images');
+      const data = await response.get()
+      data.docs.forEach(doc => {
+      setPhotos(photos => [...photos, doc.data().url])
+      });
+
+
+
+      const stateObject = {
+          title,
+          category,
+          price,
+          content,
+          photos,
+          brand,
+          make,
+          model,
+          year,
+          shippingCost,
+          tags,
+          partNumber,
+          upvoteCount,
+          votedOn,
+          comments, 
+          selectedImg
+      }
+      
+      props.editProject(stateObject);
+
+      data.docs.forEach(doc => {
       doc.ref.delete();
-    });
+      });
 
-    this.props.history.push('/');
+      props.history.push('/');
   }
-
-  handleNoise = async (e) => {
-    e.preventDefault();
-    console.log(this.state.id);
-  }
-
-  render() {
-    const { auth } = this.props;
-    
-
-    if (!auth.uid) return <Redirect to='/signin'/>
+  
+  if (!auth.uid) return <Redirect to='/signin'/>
 
     return (
       <div className="container">
-        <form onSubmit={this.handleSubmit} className="white">
+        <br/>
+        <br/>
+        <form onSubmit={handleSubmit} className="white">
           <h5 className="grey-text text-darken-3">Update Project</h5>
 
           <label htmlFor="title">Title</label>
           <div className="input-field">
-            <input type="text" id="title" placeholder={this.state.title} onChange={this.handleChange}>
+            <input type="text" id="title" placeholder={title} onChange={handleChange}>
             </input>
           </div>
           <label htmlFor="brand">Brand (optional)</label>
           <div className="input-field">
-            <input type="text" id="brand" placeholder={this.state.brand} onChange={this.handleChange}>
+            <input type="text" id="brand" placeholder={brand} onChange={handleChange}>
             </input>
           </div>
           <label htmlFor="year">Year (optional)</label>
           <div className="input-field">
-            <input type="number" min="1900" max="2099" step={1} value={this.state.year} placeholder={this.state.year} id="year"  onChange={this.handleChange} />
+            <input type="number" min="1900" max="2099" step={1} value={year} placeholder={year} id="year"  onChange={handleChange} />
           </div>
           <label htmlFor="make">Make (optional)</label>
           <div className="input-field">
-            <input type="text" id="make" placeholder={this.state.make} onChange={this.handleChange}>
+            <input type="text" id="make" placeholder={make} onChange={handleChange}>
             </input>
           </div>
           <label htmlFor="model">Model (optional)</label>
           <div className="input-field">
-            <input type="text" id="model" placeholder={this.state.model} onChange={this.handleChange}>
+            <input type="text" id="model" placeholder={model} onChange={handleChange}>
             </input>
           </div>
           <label htmlFor="category">Category</label>
           <div className="input-field">
-            <input list="categories" placeholder={this.state.category} id="category" onChange={this.handleChange}  />
+            <input list="categories" placeholder={category} id="category" onChange={handleChange}  />
               <datalist id="categories" >
                 <option value="exhaust"></option>
                 <option value="fuel and air"></option>
@@ -185,20 +185,21 @@ class CreateProject extends Component {
           </div>
           <label htmlFor="price">Price</label>
           <div className="input-field">
-              <input type="text" textContent="$" placeholder={this.state.price} id="price" value={this.state.price} onChange={this.handleChange} />
+              <input type="text" textContent="$" placeholder={price} id="price" value={price} onChange={handleChange} />
           </div>
           <label htmlFor="shippingCost">Shipping Cost</label>
           <div className="input-field">
-              <input type="text" textContent="$" placeholder={this.state.shippingCost} id="shippingCost" onChange={this.handleChange} value={this.state.shippingCost} />
+              <input type="text" textContent="$" placeholder={shippingCost} id="shippingCost" onChange={handleChange} value={shippingCost} />
           </div>
           <label htmlFor="content">Description</label>
           <div className="input-field">
-            <textarea className="materialize-textarea" id="content" placeholder={this.state.content} onChange={this.handleChange}></textarea>
+            <textarea className="materialize-textarea" id="content" placeholder={content} onChange={handleChange}></textarea>
           </div>
           <div className="input-field">
             <div >
               <UploadForm />
-                <ImageGrid photos={this.state.photos} />
+                <ImageGrid photos={photos} />
+                
             </div>
           </div>
           <div className="input-field">
@@ -212,7 +213,6 @@ class CreateProject extends Component {
         <br/>
       </div>
     );
-  }
 }
 
 const mapStateToProps = (state) => {
@@ -229,4 +229,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProject);
+export default connect(mapStateToProps, mapDispatchToProps)(EditFunction);

@@ -1,0 +1,694 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: sans-serif;
+} 
+
+@font-face { font-family: Rockstar-Display; 
+  src: url('https://www.behance.net/gallery/129352927/Rockstar-Display/modules/733057889'); } 
+/*  */
+
+
+.signup {
+  position: relative;
+  bottom: 23px;
+  height: 60px;
+}
+.login {
+  position: relative;
+  bottom: 23px;
+  height: 60px;
+}
+.main-footer {
+  color: white;
+  background-color: rgb(53, 31, 31);
+  padding-top: 3em;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.contact-input{
+	width:450px;
+	height:50px;
+	background-color:#FFFFFF;
+	display:flex;
+	justify-content: center;
+  border-radius: 50px;
+}
+.contact-input input{
+	max-width: 300px;
+	background-color: transparent;
+	border:none;
+	outline: none;
+	text-align: center;
+	color:#242425;
+}
+.contact-input a{
+	width:100px;
+	height:35px;
+	background-color:#236c7e;
+	color:#FFFFFF;
+	display: flex;
+	font-size: 0.9rem;
+	justify-content: center;
+	align-items: center;
+	margin: auto 10px;
+	border-radius: 20px;
+	font-weight: 500;
+}
+.container-email {
+  margin: 0 auto;
+  border-radius: 15px;
+  border: 1px solid black;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  background-color:rgb(172, 71, 71);
+}
+.block-divider {
+  background-color: rgb(53, 31, 31);
+  margin-left: calc(50% - 50vw);
+  width: 100vw;
+  height: 0 auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.block-header {
+  color: white;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+}
+.block-button {
+  text-align: center;
+  margin: auto;
+  width: 50%;
+  position: relative;
+  margin-bottom: 50px;
+  margin-top: 30px;
+}
+.block-email {
+  text-align: center;
+  margin: auto;
+  width: 70%;
+  position: relative;
+  bottom: 15px;
+  margin-bottom: 30px;
+  margin-top: 70px;
+}
+.title-span {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.comment-section {
+  margin: 0 auto;
+  padding: 20px;
+  margin-left: calc(40% - 32vw);
+  width: 80vw;
+}
+.project-container { 
+  overflow: auto;
+  white-space: nowrap;
+  margin: 10px;
+  background-color: #236c7e;
+  border: 1px solid black;
+}
+.project-filler { 
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+}
+.project-element { 
+  position: relative;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.project-img {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
+.progress-bar{
+  height: 5px;
+  background: var(--primary);
+  margin-top: 20px;
+}
+.img-grid{
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-gap: 2px;
+}
+.img-wrap{
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  /* padding controls height, will always be perfectly square regardless of width */
+  position: relative;
+  opacity: 0.8;
+}
+.img-wrap img{
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+.backdrop img{
+  display: block;
+  max-width: 60%;
+  max-height: 80%;
+  margin: 60px auto;
+  box-shadow: 3px 5px 7px rgba(0,0,0,0.5);
+  border: 3px solid white;
+}
+.image-sm {
+  width: 400px;
+}
+.vote {
+  width: 100%;
+}
+.scrollContainer {
+  height: 200px;
+  overflow: scroll;
+}
+.badge {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  z-index: 10;
+}
+.right {
+  position: absolute;
+  left: 23em;
+  top: 2.6em;
+}
+
+.parts-link {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  line-height: 32px;
+  padding: 10px;
+  font-family: Rockstar-Display;
+  font-size: 23px;
+}
+.search-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  bottom: 13px;
+  background-color: white;
+  color: white;
+  width: 100%;
+  height: 40px;
+}
+.searchBar[type="text"], .searchBar, .searchBar:focus, .searchBar::placeholder {
+  text-align: center;
+  color: black;
+  height: 100vw;
+  width: 100%;
+  position: relative;
+  bottom: 2px;
+
+}
+.browse-heading {
+  background-color: rgb(189, 86, 86);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 50px; 
+}
+.browse-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.img-grid{
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+  grid-gap: 2px;
+}
+.img-wrap{
+  overflow: hidden;
+  height: 0;
+  padding: 50% 0;
+  position: relative;
+  opacity: 0.8;
+}
+.img-wrap img{
+  min-width: 100%;
+  min-height: 100%;
+  max-width: 150%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.row {
+  margin: 2px; 
+}
+div.scrollmenu {
+  background-color: #236c7e;
+  overflow: auto;
+  white-space: nowrap;
+  margin-left: 10px;
+  width: 100vw;
+  border-radius: 20px;
+}
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none; 
+}
+div.scrollmenu a:hover {
+  background-color: #777;
+}
+.allLinks {
+  display: none;
+}
+.new-project {
+  margin: 10px;
+  position: relative;
+  line-height: 1.5em;
+}
+
+.badge {
+  background: radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+  background: -moz-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+  background: -ms-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+  background: -o-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+  background: -webkit-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+  background-color: #ed2324;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 5px;
+  position: absolute;
+  left: 53px;
+  top: -23px;
+  display: block;
+}
+.message-count {
+  position: absolute;
+  display: block;
+  font: bold 14px/13px Helvetica, Verdana, Tahoma;
+  text-align: center;
+  margin: 0;
+  top: 4.5px;
+  left: 5.1px;
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+}
+.double-count {
+  position: absolute;
+  display: block;
+  font: bold 14px/13px Helvetica, Verdana, Tahoma;
+  text-align: center;
+  margin: 0;
+  top: 4.5px;
+  left: 2.9px;
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+}
+#nav {
+  position: relative;
+  height: 60px;
+}
+#header {
+  position: relative;
+}
+
+#navbar {
+  background-color: #000;
+}
+#motorcycle {
+  font-size: 40px;
+  position: absolute;
+  left: 40px;
+}
+#notification-link {
+  position: absolute;
+  top: -5.6em;
+  right: 238px;
+  background-color: #236c7e;
+}
+#navbar {
+  background-color: #000;
+}
+#signout {
+  position: absolute;
+  top: 23px;
+}
+#motorcycle {
+  font-size: 25px;
+  color: rgb(17, 0, 255);
+  float: left;
+  position: absolute;
+  left: 30px;
+}
+#bars {
+  margin: 0 auto;
+  display: inline;
+  position: absolute;
+  right: 7px;
+  top: -17px;
+  height: 28px;
+}
+#dropdown {
+  position: relative;
+  z-index: 10;
+  top: -1.4em;
+}
+#dropdown-menu {
+  display: inline;
+  position: absolute;
+  width: 100%;
+  left: 5%;
+  top: calc(100% + 2.7rem);
+  padding: .75rem;
+  border-radius: .25rem;
+  box-shadow: 0 2px 5px 0 rbga(0, 0, 0, .1);
+  /* transform: translateY(-10px);
+  transition: opacity 150ms ease-in-out, transform 150ms ease-in-out; */
+}
+#dropdown > .link:focus + #dropdown-menu {
+  opacity: 1;
+  /* transform: translateY(0); */
+
+  
+}
+#dropdown-content {
+  background-color: black;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+#header {
+  position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .signup {
+    position: relative;
+    bottom: 23px;
+    height: 60px;
+  }
+  .contact-input{
+    width:350px;
+  }
+  .contact-input input{
+    max-width: 200px;
+  }
+  .box-3 { background-color: #3d3bca; }
+  .btn-three {
+    color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+    background-color: #7393da;
+  }
+  .btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(218, 153, 153, 0.068);
+    transition: all 0.3s;
+  }
+  .btn-three:hover::before {
+    opacity: 0 ;
+    transform: scale(0.5,0.5);
+  }
+  .btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.5);
+    transform: scale(1.2,1.2);
+  }
+  .btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1,1);
+  }
+  .vote {
+    width: 100%;
+  }
+  .scrollContainer {
+    height: 200px;
+    overflow: scroll;
+  }
+  .message-count {
+    color: rgb(0, 0, 0);
+    font-size: 0.2px;
+    font-family: Arial, san-serif;
+    font-weight: bold;
+    display: flex;
+
+  }
+  .badge {
+    position: absolute;
+    right: 10px;
+    top: -5px;
+    z-index: 10;
+  }
+  .right {
+    position: absolute;
+    left: 23em;
+    top: 2.6em;
+  }
+  .parts-link {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    line-height: 32px;
+    padding: 10px;
+    font-family: Rockstar-Display;
+    font-size: 23px;
+  }
+  .searchBar[type="text"], .searchBar, .searchBar:focus, .searchBar::placeholder {
+    text-align: center;
+    color: black;
+  }
+  .img-grid{
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr;
+    grid-gap: 2px;
+  }
+  .img-wrap{
+    overflow: hidden;
+    height: 0;
+    padding: 50% 0;
+    /* padding controls height, will always be perfectly square regardless of width */
+    position: relative;
+    opacity: 0.8;
+  }
+  .img-wrap img{
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 150%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .row {
+    margin: 2px; 
+  }
+  div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+    margin: 10px;
+  }
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none; 
+  }
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+  .allLinks {
+    display: none;
+  }
+  .new-project {
+    margin: 10px;
+    position: relative;
+    line-height: 1.5em;
+  }
+
+  .badge {
+    background: radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+    background: -moz-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+    background: -ms-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+    background: -o-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+    background: -webkit-radial-gradient( 5px -9px, circle, white 8%, #ed2324 26px );
+    background-color: #ed2324;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    left: 53px;
+    top: -23px;
+    display: block;
+  }
+  .message-count {
+    position: absolute;
+    display: block;
+    font: bold 14px/13px Helvetica, Verdana, Tahoma;
+    text-align: center;
+    margin: 0;
+    top: 4.5px;
+    left: 6px;
+    font-size: 12px;
+  }
+  #nav {
+    position: relative;
+    height: 60px;
+  }
+  #notification-link {
+    position: absolute;
+    top: -5.6em;
+    right: 238px;
+    background-color: rgb(30, 175, 175);
+  }
+  #navbar {
+    background-color: #000;
+  }
+  #signout {
+    position: absolute;
+    top: 23px;
+  }
+  #motorcycle {
+    font-size: 25px;
+    color: rgb(17, 0, 255);
+    float: left;
+    position: absolute;
+    left: 30px;
+  }
+  #bars {
+    margin: 0 auto;
+    display: inline;
+    position: absolute;
+    right: 7px;
+    top: -17px;
+    height: 28px;
+  }
+  #dropdown {
+    position: relative;
+    z-index: 10;
+    top: -1.4em;
+  }
+  #dropdown-menu {
+    display: inline;
+    position: absolute;
+    width: 100%;
+    left: 5%;
+    top: calc(100% + 2.7rem);
+    padding: .75rem;
+    border-radius: .25rem;
+    box-shadow: 0 2px 5px 0 rbga(0, 0, 0, .1);
+    /* transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out; */
+  }
+  #dropdown > .link:focus + #dropdown-menu {
+    opacity: 1;
+    /* transform: translateY(0); */
+
+    
+  }
+  #dropdown-content {
+    background-color: black;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  #header {
+    position: relative;
+  }
+    @media only screen and (max-width: 450px) {
+      .login {
+        position: relative;
+        bottom: 23px;
+        left: 19rem;
+        height: 60px;
+      }
+      .contact-input{
+        width:300px;
+      }
+      .contact-input input{
+        max-width: 150px;
+      }
+    }
+      @media only screen and (max-width: 400px) {
+        .login {
+          position: relative;
+          bottom: 23px;
+          left: 17rem;
+          height: 60px;
+        }
+        .contact-input{
+          width:250px;
+        }
+        .contact-input input{
+          max-width: 100px;
+        }
+      }
+        @media only screen and (max-width: 360px) {
+          .login {
+            position: relative;
+            bottom: 23px;
+            left: 15rem;
+            height: 60px;
+          }
+          .contact-input{
+            width:250px;
+          }
+          .contact-input input{
+            max-width: 100px;
+          }
+
+        }
+}

@@ -7,7 +7,7 @@ import { compose } from 'redux';
 import { updateNotification } from '../../store/actions/notificationActions';
 
 const NotificationDashboard = (props) => {
-    const { notifications, auth } = props;
+    const { notifications, users, auth } = props;
     const seen = useRef(new Array());
     const [saw, setSaw] = useState([]) 
 
@@ -44,23 +44,24 @@ const NotificationDashboard = (props) => {
     }
 
     useEffect(async () => {
+        console.log(users);
         if (notifications) {
             notifications.map(async item => {
-                const response = projectFirestore.collection('users');
-                const data = await response.get()
-                data.docs.forEach(doc => {
-                    if (doc.id === auth.uid && doc.data().viewedUpdates.includes(item.id) && !seen.current.includes(item.id) && !saw.includes(item.id)) {
+                users.forEach((user) => {
+                    if (user.id === auth.uid && user.viewedUpdates.includes(item.id) && !seen.current.includes(item.id) && !saw.includes(item.id)) {
                         seen.current = [...seen.current, item.id]
-                        setSaw(saw.concat(item.id))
+                        setSaw(saw => [...saw, item.id])
                     }
-                });
-
+                })
             }) 
-        }
+        } 
     })
 
     return (
         <div className="section">
+            <br/>
+            <br/>
+            <br/>
             <div className="card z-depth-0">
                 <div className="card-content">
                     <span className="card-title">Notifications</span>   
@@ -110,6 +111,7 @@ const mapDispatchToProps = dispatch => {
   
   export default compose(
       connect(mapStateToProps, mapDispatchToProps),      firestoreConnect([
-        { collection: 'notifications', orderBy: ['time', 'desc']}
+        { collection: 'notifications', orderBy: ['time', 'desc']},
+        { collection: 'users'}
       ])
     )(NotificationDashboard);

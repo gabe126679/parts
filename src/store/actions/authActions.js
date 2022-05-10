@@ -33,6 +33,7 @@ export const signUp = (newUser) => {
       newUser.email, 
       newUser.password
         ).then(resp => {
+
           return firestore.collection('users').doc(resp.user.uid).set({
             firstName: newUser.firstName,
             lastName: newUser.lastName,
@@ -45,4 +46,46 @@ export const signUp = (newUser) => {
         dispatch({ type: 'SIGNUP_ERROR', err});
       });
     }
+}
+
+export const addToCart = (item, price) => {
+  return async (dispatch, getState, { getFirestore }) => {
+      const firestore = getFirestore();
+      const viewerId = getState().firebase.auth.uid;
+      
+      firestore.collection('users').doc(viewerId).update({
+          cartItems: firestore.FieldValue.arrayUnion({
+            id: item,
+            price: price
+          })
+      })
+      .then(() => {
+          dispatch({ type: 'UPDATE_CART_SUCCESS' });
+      }).catch((err) => {
+          dispatch({ type: 'UPDATE_CART_ERROR', err });
+      });
+
+  }
+}
+
+export const updateCart = (item, price) => {
+  return async (dispatch, getState, { getFirestore }) => {
+      const firestore = getFirestore();
+      const cartHolder = getState().firebase.auth.uid;
+
+
+
+
+      firestore.collection('users').doc(cartHolder).update({
+        cartItems: firestore.FieldValue.arrayRemove({
+          id: item,
+          price: price
+        })
+      }).then(() => {
+          dispatch({ type: 'DELETE_CART_SUCCESS' });
+      }).catch((err) => {
+          dispatch({ type: 'DELETE_CART_ERROR', err });
+      });
+
+  }
 }

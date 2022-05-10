@@ -4,12 +4,11 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { deleteProject } from '../../store/actions/projectActions'
 import { updateProject } from '../../store/actions/projectActions'
+import { addToCart } from '../../store/actions/authActions'
 import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
-import StripeCheckout from 'react-stripe-checkout';
-import axios from 'axios';
-
-const stripeKey = process.env.REACT_APP_STRIPE_KEY;
+import Footer from "../layout/Footer"
+import { projectFirestore } from '../../config/fbConfig'
 
 const button2Style = {
   position: "relative",
@@ -24,8 +23,6 @@ const button2Style = {
 const ProjectDetails = (props) => {
     const [display, setDisplay] = useState("")
     const { project, auth } = props;
-    
-    if (!auth.uid) return <Redirect to='/signin'/>
     
     const handleDelete = (e) => {
       e.preventDefault();
@@ -46,79 +43,63 @@ const ProjectDetails = (props) => {
       setDisplay(e.target.value);
       console.log(props);
     }
+    const handleCart = async (e) => {
+      e.preventDefault(); 
+      const response = projectFirestore.collection('users');
+      const data = await response.get()
+      data.docs.forEach(doc => {
+        if (doc.id === auth.uid) {
+          props.addToCart(props.match.params.id, project.price);
+        }
 
-
-
-    async function handleToken(token) {
-      let product = {
-        name: project.title,
-        price: project.price
-      }
-      const response = await axios.post("/projectCheckout", {
-        token,
-        product
       });
-
-      const { status } = response.data;
-      if (status === "success") {
-        console.log("succes");
-      } else {
-        console.log("error");
-      }
     }
     
 
     if (project) {
       
       return (
+        <div>
+        <br/>        
+        <br/>
+        <br/>
         <div className="container section project-details">
           <div className="card z-depth-0">
             <div className="card-content">
-              <span className="card-title center">{project.title}</span>
-              <p className="card-content center">{project.brand}</p>
-              <p className="card-content center">{project.make}</p>
-              <p className="card-content center">{project.model}</p>
-              <p className="card-content center">{project.year}</p>
-              <p className="card-content center">{project.partNumber}</p>
-              <p className="card-content center">{project.content}</p>
-              <h5 className="card-content center">{project.price}</h5>
-                  <br/>
+              <span className="title-span">{project.title}</span>
+              <br/>
+              <p className="grey-text left">brand:</p>
+              <br/>
+              <p className="">&emsp;{project.brand}</p>
+              <p className="grey-text left">make:</p>
+              <br/>
+              <p className="">&emsp;{project.make}</p>
+              <p className=" grey-text left">model:</p>
+              <br/>
+              <p className="">&emsp;{project.model}</p>
+              <p className=" grey-text left">year:</p>
+              <br/>
+              <p className="">&emsp;{project.year}</p>
+              <p className=" grey-text left">part number:</p>
+              <p className="">&emsp;{project.partNumber}</p>
+
+              <p className=" grey-text center">description:</p>
+              <p className=" left">{project.content}</p>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <p className=" grey-text center">price:</p>
+              <h5 className="left">{project.price}
+              </h5>
             </div>
             <br/>
             <div className="card-image">
-                <img src={project.photos[0]}/>
+                <img src={project.photos}/>
             </div>
             <div className="card-action grey lighten-4 grey-text">
-              <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
-              <div>{moment(project.createdAt.toDate()).calendar()}</div>
-              <br/>
-              <div className="scrollContainer" > 
-              {project.comments.map((post) => {
-                if (project.comments) {
-                  return <div>
-                    <div className="black-text">{post.authorFirst} {post.authorLast}
-                    </div> 
-                    <div className="blue center white-text">{post.comment}
-                    </div> 
-                    <div className="right-align">{moment(post.createdAt.toDate()).calendar()}
-                  </div> 
-                  <br/>
-
-                  </div>
-                }
-
-                })
-              }
-              </div>
-
-            
-              <form onSubmit={handleSubmit}>
-                <div>
-                  <textarea onChange={handleChange} placeholder="leave a comment" name="comments" id="comments" >
-                  </textarea>
-                </div>
-                <input type="submit" value="Submit"/>
-              </form>
               <div >
               <br/>
               {(() => {
@@ -133,19 +114,51 @@ const ProjectDetails = (props) => {
                   </div> 
                 } 
                 })()}
-                  <StripeCheckout
-                  stripeKey={stripeKey}
-                  token={handleToken}
-                  billingAddress
-                  shippingAddress
-                  amount={project.price * 100}
-                  name={project.title}
-                  
-                  />
+                  <button className="btn btn-three"  onClick={handleCart}>Add to Cart</button>
+
               </div>
             </div>
+            <br/>
           </div>
+          <div className="comment-section white">
+            <br/>
+              <div>Posted by {project.authorFirstName} {project.authorLastName}</div>
+                <div>{moment(project.createdAt.toDate()).calendar()}</div>
+                <br/>
+                <div className="scrollContainer grey" > 
+                {project.comments.map((post) => {
+                  if (project.comments) {
+                    return <div>
+                      <div className="black-text">{post.authorFirst} {post.authorLast}
+                      </div> 
+                      <div className="blue center white-text">{post.comment}
+                      </div> 
+                      <div className="right-align">{moment(post.createdAt.toDate()).calendar()}
+                    </div> 
+                    <br/>
+
+                    </div>
+                  }
+
+                  })
+                }
+                </div>
+
+              
+                <form onSubmit={handleSubmit}>
+                  <div>
+                    <textarea onChange={handleChange} placeholder="leave a comment" name="comments" id="comments" >
+                    </textarea>
+                  </div>
+                  <button type="submit" value="Submit" className="btn">submit comment</button>
+                </form>
+              </div>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <Footer/>
+      </div>
       )
     } else {
       return (
@@ -169,7 +182,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     deleteProject: (project) => dispatch(deleteProject(project)),
-    updateProject: (comment, project) => dispatch(updateProject(comment, project))
+    updateProject: (comment, project) => dispatch(updateProject(comment, project)),
+    addToCart: (item, price) => dispatch(addToCart(item, price))
     }
 }
 

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { signOut } from '../../store/actions/authActions'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signOut } from '../../store/actions/authActions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { projectFirestore } from '../../config/fbConfig'
+import { projectFirestore } from '../../config/fbConfig';
+import Scart from "../images/shopping-cart.png";
 
 const SignedInLinks = (props) => {
   const { notifications, auth } = props;
 
   const [Open, setOpen] = useState(false);
   const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(0);
   
   let items = [];
 
@@ -25,6 +27,7 @@ const SignedInLinks = (props) => {
       data.docs.forEach(user => {
         if (user.id === auth.uid) {
           setCount(items.length - user.data().viewedUpdates.length);
+          setCart(user.data().cartItems.length);
         }
   
       });
@@ -33,56 +36,80 @@ const SignedInLinks = (props) => {
   }, [notifications]);
 
   const handleClick = () => {
+
     if (Open) {
       setOpen(false);
       } else {
       setOpen(true);
+
       }
   }
 
+
   return (
     <div  id="header" >
-      <ul className="right">
+     
+      <ul data-aos="fade-in" data-aos-duration="1500" className="right">
         <li className="allLinks"><NavLink to='/create'>New Project</NavLink></li>
-        <li className="allLinks"><a onClick={props.signOut}>Log Out</a></li>
+        <li className="allLinks"><NavLink to='/signin' onClick={props.signOut}>Create Product</NavLink></li>
         <li><NavLink to='/notifications' id="notification-link" className="btn btn-floating">{props.profile.initials}</NavLink></li>
-      </ul>      
+      </ul>   
+      
       {(() => {
         if (count > 0 && count < 10) {
           return <div className="badge"><div className="message-count">{count}</div>
+          <br/>
                 </div>
         } else if (count >= 10) {
           return <div className="badge"><div className="double-count">{count}</div>
           </div>
         }
       })()}
-      {(() => {
-        if (Open) {
-          return <div id="dropdown">
-          <button id="bars" className="link" onClick={handleClick}><FontAwesomeIcon style={{color: "white"}} icon={faBars} /></button>
-          <div id="dropdown-menu">
-            <div className="container" id="dropdown-content">
-              <NavLink className="new-project" to='/create' onClick={handleClick}>New Project</NavLink>
-              <NavLink className="new-project" to='/notifications' onClick={handleClick}>Notifications</NavLink>
-              <NavLink className="new-project" to='/' onClick={props.signOut}>Sign Out</NavLink>
-            </div>
-          </div>
-        </div>
-        } else {
-          return <div id="dropdown">
-            <button id="bars" className="link" onClick={handleClick}><FontAwesomeIcon style={{color: "purple"}} icon={faBars} />
-          
-            </button>
-          </div>
-        }
-      })()}
+      <div id="dropdown">
+        <button id="bars" className="link" onClick={handleClick}><FontAwesomeIcon style={{color: "white"}} icon={faBars} /></button>
+          {(() => {
+            if (Open) {
+              return (
+                <div id="dropdown-menu">
+                  <div className="container" id="dropdown-content">
+                    <div className="nav-block container" >
+                      <br/>
+                      <button onClick={() => {
+                        setOpen(false);
+                      }} className="nav-close btn btn-three">X</button>
+                      <br/>
+                      <NavLink className="nav-links new-project" to='/create' onClick={handleClick}>New Project</NavLink>
+                      <NavLink className="nav-links new-project" to='/notifications' onClick={handleClick}>Notifications</NavLink>
+                      <NavLink className="nav-links new-project" to='/' onClick={props.signOut}>Sign Out</NavLink>
+                    </div>
+                  </div>
+                </div>
+              )
+            } 
+            if (cart > 0 && cart < 10) {
+              return <Link to="/test">
+              <div className="cart-badge">
+                <div className="cart-count">{cart}
+                </div>
+              </div>
+
+                <img src={Scart} className="img-cart "/>
+            </Link>
+            } else if (cart >= 10 || cart <= 0) {
+              return <Link to="/test">
+
+                <img src={Scart} className="img-cart "/>
+            </Link>
+            }
+          })()}
+      </div>
 
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return {
     auth: state.firebase.auth,
     notifications: state.firestore.ordered.notifications

@@ -7,14 +7,14 @@ const ProjectSummary = ({project}) => {
 
     return (
 
-      <div className="card z-depth-0 project-sumarry">
-        <div className="card-content grey-text text-darken-3">
-          <span className="card-title">{project.title}</span>
+      <div className="animated  card z-depth-0 project-sumarry">
+        <div className="animated-section card-content grey-text text-darken-3">
+          <span className=" card-title">{project.title}</span>
           <p>Posted by {project.authorFirstName} {project.authorLastName}</p>
           <p className="grey-text">{moment(project.createdAt.toDate()).calendar()}</p>
             <p className="right-align">{project.upvoteCount} <FontAwesomeIcon style={{color: "grey"}} icon={faArrowUp} /> </p>
           <div className="card-image">
-            <img className="project-img" alt="Responsive Image" src={project.photos}/>
+            <img className="project-img" alt="Responsive Image" src={project.photos[0]}/>
           </div>
         </div>
       </div> 
