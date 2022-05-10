@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { editProject } from '../../store/actions/projectActions';
 import { Redirect } from 'react-router-dom';
 import UploadForm from './UploadForm';
-import EditGrid from './EditGrid';
+import ImageGrid from './ImageGrid';
 // import Modal from './Modal';
 // import Display from './Display';
 import { projectFirestore } from '../../config/fbConfig'
@@ -200,7 +200,7 @@ class EditFunction extends Component {
           <div className="input-field">
             <div >
               <UploadForm />
-                <EditGrid photos={photos} />
+                <ImageGrid photos={photos} />
             </div>
           </div>
           <div className="input-field">

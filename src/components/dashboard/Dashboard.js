@@ -14,8 +14,6 @@ import 'aos/dist/aos.css';
 
 AOS.init();
 
-
-
 class Dashboard extends Component {
   constructor(props) {
     super(props);

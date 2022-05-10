@@ -158,9 +158,6 @@ const Cart = (props) => {
         setItems(newItems);
     }
 
-
-
-
     const clientString = "$" + total.toString().slice(0, -2);
 
     return (
@@ -230,7 +227,7 @@ const Cart = (props) => {
         </div>
         :
        <div>
-           <h2>You just bought a sweet spatula congrats this is the best decision of you're life</h2>
+           <h2>Your Purchase Was Successful</h2>
        </div> 
         }
 
